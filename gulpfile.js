@@ -67,6 +67,7 @@ function watch() {
     gulp.watch('src/css/main.scss', css);
 }
 
+// Creates a gh-pages branch in GitHub (if there isn't one already) and sends the dist folder to that branch
 function deploy() {
     return ghpages.publish('dist');
 }
