@@ -4,6 +4,7 @@ const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require ('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
+const ghpages = require('gh-pages');
 
 const browserSync = require('browser-sync').create();
 
@@ -66,6 +67,11 @@ function watch() {
     gulp.watch('src/css/main.scss', css);
 }
 
+// Creates a gh-pages branch in GitHub (if there isn't one already) and sends the dist folder to that branch
+function deploy() {
+    return ghpages.publish('dist');
+}
+
 exports.html = html;
 exports.fonts = fonts;
 exports.images = images;
@@ -73,3 +79,4 @@ exports.css = css;
 exports.watch = watch;
 // Runs all the following tasks on "gulp" command
 exports.default = series(html, fonts, images, css, watch);
+exports.deploy = deploy;
