@@ -80,6 +80,10 @@ section.two-col {
     align-items: center;
 }
 
+section.two-col img {
+    width: 100%;
+}
+
 section.two-col p {
     margin: 20px 0 20px 0;
 }
