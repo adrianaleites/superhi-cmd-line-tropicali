@@ -1,0 +1,125 @@
+:root {
+    --primary-color: #f70201;
+    --dark-text: #151620;
+    --light-text: #ffffff;
+    --bg-color: #ffffff;
+
+    --main-spacing: 64px;
+    --gap-spacing: 40px;
+    --header-height: 80px;
+    --hero-spacing: 240px;
+    --centered-width: 50%;
+}
+
+@custom-media --mq-medium (max-width: 800px);
+@custom-media --mq-small (max-width: 550px);
+
+@media (--mq-medium) {
+    :root {
+        --main-spacing: 40px;
+        --gap-spacing: 32px;
+        --hero-spacing: 120px;
+        --centered-width: 75%;
+    }
+}
+
+@media (--mq-small) {
+    :root {
+        --main-spacing: 32px;
+        --hero-spacing: 80px;
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+header {
+    background-color: var(--primary-color);
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--main-spacing) 0 var(--main-spacing);
+}
+
+section.hero {
+    padding: var(--hero-spacing) var(--main-spacing) var(--hero-spacing) var(--main-spacing);
+    background-color: #eeeeee;
+    color: var(--light-text);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+
+    background-image:  image-set(
+        'img/rainbow.jpg' 1x,
+        'img/rainbow@2x.jpg' 2x
+    );
+    background-size: cover;
+    background-position: center;
+}
+
+section.hero.hero--cta {
+    background-image:  image-set(
+        'img/green-wall.jpg' 1x,
+        'img/green-wall@2x.jpg' 2x
+    );
+}
+
+section.hero.hero--cta h2 {
+    margin-bottom: var(--main-spacing);
+}
+
+section.two-col, section.centered, footer.centered  {
+    margin: var(--main-spacing);   
+}
+
+section.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--gap-spacing);
+    align-items: center;
+}
+
+section.two-col img {
+    width: 100%;
+}
+
+section.two-col p {
+    margin: 20px 0 20px 0;
+}
+
+.button {
+    display: inline-block;
+    color: var(--light-text);
+    border: 1px solid var(--light-text);
+    padding: 15px 30px 15px 30px;
+}
+
+.button.button--full {
+    background-color: var(--primary-color);
+}
+
+section.centered {
+    text-align: center;
+    width: var(--centered-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer.centered {
+    text-align: center;
+}
+
+@media (--mq-small) {
+    section.two-col {
+        grid-template-columns: 1fr;
+    }
+
+    header img {
+        width: 160px;
+    }
+
+    .button {
+        padding: 8px 15px 8px 15px;
+    }
+}    

@@ -1,14 +1,13 @@
 const gulp = require('gulp');
 const { series } = require('gulp');
-const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
-const sourcemaps = require ('gulp-sourcemaps');
+const postcss = require('gulp-postcss');
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
 const imagemin = require('gulp-imagemin');
 const ghpages = require('gh-pages');
 
 const browserSync = require('browser-sync').create();
-
-sass.compiler = require('node-sass');
 
 // Sends all (*) HTML files from src folder to dist folder
 function html() {
@@ -32,11 +31,26 @@ function images() {
 // Compiles CSS
 function css() {
     // Finds the input sass file to compile
-    return gulp.src('src/css/main.scss')
+    return gulp.src([
+        'src/css/reset.css',
+        'src/css/fonts.css',
+        'src/css/main.css'
+    ])
         // Initializes sourcemaps
         .pipe(sourcemaps.init())
-        // Compiles scss to css
-        .pipe(sass())
+        // Compiles PostCSS to CSS using the following plugins: Autoprefixer and PostCSS Preset Env
+        .pipe(
+            postcss([
+                // Add vendor prefixes to CSS rules using values from Can I Use
+                require ('autoprefixer'),
+                // Lets you convert modern CSS into something most browsers can understand
+                require('postcss-preset-env')({
+                    stage: 1,
+                    browsers: ['IE 11', 'last 2 versions']
+                })
+            ])
+        )
+        .pipe(concat('main.css'))
         // Minifies CSS
         .pipe(
             cleanCSS({
@@ -64,7 +78,7 @@ function watch() {
     gulp.watch('src/*.html', html).on('change', browserSync.reload);
     gulp.watch('src/fonts/*', fonts);
     gulp.watch('src/img/*', images);
-    gulp.watch('src/css/main.scss', css);
+    gulp.watch('src/css/*', css);
 }
 
 // Creates a gh-pages branch in GitHub (if there isn't one already) and sends the dist folder to that branch
