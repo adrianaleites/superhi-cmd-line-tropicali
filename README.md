@@ -52,7 +52,7 @@ Founded in 2016, [SuperHi](https://www.superhi.com/) is an online creative educa
 
 ---
 
-### Use my referral link to learn at [Super Hi](https://www.superhi.com/), at your own pace and wherever you want:
+### Use my referral link to learn at [SuperHi](https://www.superhi.com/), at your own pace and wherever you want:
 https://www.superhi.com/?r=adrianaleites
 
 ---
